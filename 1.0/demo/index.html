@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>demo标题</title>
+    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js" charset="utf-8"></script>
+</head>
+	<style>
+		
+		body{
+			background:#eee;
+		}
+		
+		.demosection{
+			margin:20px;
+			padding:10px;
+			min-height:100px;
+			background:#fff;
+		}
+		
+		.item, .demo2item{
+			width:50px;
+			height:50px;
+			line-height:50px;
+			overflow:hidden;
+			border-radius:50px;
+			text-align:center;
+			background:#000;
+			color:#fff;
+		}
+		.demo2item a{
+			color:#fff;
+		}
+		
+	</style>
+<body>
+
+<div class="demosection">
+	<h2>从页面已有的节点中构造</h2>
+
+	<div class="para" style="padding:100px;">
+	<a id="J_demo1" href='#'>查看更多</a>
+	</div>
+	<style>.submenu{display:none}</style>
+	<div class="submenu">
+		<a href="#">淘宝</a>
+		<a href="#">支付宝</a>
+		<a href="#">天猫</a>
+		<a href="#">聚划算</a>
+		<a href="#">一淘</a>
+		<a href="#">1688</a>
+	</div>
+
+</div>
+
+<script>
+    var S = KISSY;
+    if (S.Config.debug) {
+        var srcPath = "../../../";
+        S.config({
+            packages:[
+                {
+                    name:"gallery",
+                    path:srcPath,
+                    charset:"utf-8",
+                    ignorePackageNameInUri:true
+                }
+            ]
+        });
+    }
+
+    S.use('sizzle,gallery/smartmenu/1.0/index', function (S, sizzle, Smartmenu) {
+		var $=S.all;
+		var demo1 = new Smartmenu({
+			trigger:"#J_demo1",
+			items:$(".submenu a"),
+			itemCls:"item",
+			distance:100,
+			//triggerType:"hover",
+			intervalDeg:60,
+			path:false
+		});
+		demo1.get("items").on("click", function(ev){
+			ev.halt();
+			console.log(ev.target);
+		})
+    })
+</script>
+</body>
+</html>
