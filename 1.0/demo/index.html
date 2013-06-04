@@ -4,87 +4,115 @@
     <meta charset="utf-8"/>
     <title>demo标题</title>
     <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js" charset="utf-8"></script>
+	<script src="src/1k/1k.js"></script>
+	<script src="src/1k/highlight.js"></script>
+	<script>
+		var S = KISSY;
+		if (S.Config.debug) {
+			var srcPath = "../../../";
+			S.config({
+				packages:[
+					{
+						name:"gallery",
+						path:srcPath,
+						charset:"utf-8",
+						ignorePackageNameInUri:true
+					}
+				]
+			});
+		}
+		S.ready(function(){
+			$1k.highlight.init({    //组件初始化
+				skin:'crm',//默认皮肤
+				edit:true,//开启编辑运行
+				JsRequire:''//导入js
+			});
+		});
+	</script>
 </head>
-	<style>
-		
-		body{
-			background:#eee;
-		}
-		
-		.demosection{
-			margin:20px;
-			padding:10px;
-			min-height:100px;
-			background:#fff;
-		}
-		
-		.item, .demo2item{
-			width:50px;
-			height:50px;
-			line-height:50px;
-			overflow:hidden;
-			border-radius:50px;
-			text-align:center;
-			background:#000;
-			color:#fff;
-		}
-		.demo2item a{
-			color:#fff;
-		}
-		
-	</style>
-<body>
 
-<div class="demosection">
-	<h2>从页面已有的节点中构造</h2>
+<body style="margin:2em 4em;">
 
-	<div class="para" style="padding:100px;">
-	<a id="J_demo1" href='#'>查看更多</a>
-	</div>
-	<style>.submenu{display:none}</style>
-	<div class="submenu">
-		<a href="#">淘宝</a>
-		<a href="#">支付宝</a>
-		<a href="#">天猫</a>
-		<a href="#">聚划算</a>
-		<a href="#">一淘</a>
-		<a href="#">1688</a>
-	</div>
 
+<div>
+<p>Smartmenu是一款基于KISSY，同时适用于触屏设备上和PC设备上的菜单</p>
+<p>配置丰富、使用灵活，可以应用到多种场景，代码不到300行。</p>
+<p>如有任何建议或者bug请直接联系：常胤。</p>
 </div>
 
-<script>
-    var S = KISSY;
-    if (S.Config.debug) {
-        var srcPath = "../../../";
-        S.config({
-            packages:[
-                {
-                    name:"gallery",
-                    path:srcPath,
-                    charset:"utf-8",
-                    ignorePackageNameInUri:true
-                }
-            ]
-        });
-    }
 
-    S.use('sizzle,gallery/smartmenu/1.0/index', function (S, sizzle, Smartmenu) {
-		var $=S.all;
-		var demo1 = new Smartmenu({
-			trigger:"#J_demo1",
-			items:$(".submenu a"),
-			itemCls:"item",
-			distance:100,
-			//triggerType:"hover",
-			intervalDeg:60,
-			path:false
-		});
-		demo1.get("items").on("click", function(ev){
-			ev.halt();
-			console.log(ev.target);
-		})
-    })
-</script>
+
+
+<h3>demo</h3>
+<ol>
+	<li><a href="demo1.html">从页面已有的节点中构造</a></li>
+	<li><a href="demo4.html">多个trigger触发同一个菜单</a></li>
+	<li><a href="demo5.html">动画效果展示菜单</a></li>
+	<li><a href="demo2.html">固定在某个区域的菜单</a></li>
+	<li><a href="demo3.html">可以拖动的菜单</a></li>
+	
+</ol>
+
+
+
+<h3>所有可配置属性及默认值，通过不同的组合，可以实现不同的交互需求</h3>
+<textarea class="lang-js">
+	//第一个菜单的度数
+	startDeg:{
+		value:30
+	},
+	//菜单之间间隔的度数
+	intervalDeg:{
+		value:50
+	},
+	//菜单展示的方向 1=顺时针  -1=逆时针
+	direction:{
+		value:-1,
+		validator :function(value){
+			return value===1||value===-1;
+		}
+	},
+	//菜单离圆心的距离
+	distance:{
+		value:150
+	},
+	//菜单的展示会以trigger的坐标圆点
+	trigger:{
+		value:null
+	},
+	//菜单项，可以是一个选择器，也可以是Node，也可以是html数组
+	items:{
+		value:[]
+	},
+	//为了也能适应pc机
+	triggerType:{
+		value:"tap click"
+	},
+	//是否显示，这是一个私有属性，标记菜单是否显示，不要去设置他，否则会出乱子
+	visible: {
+		value: false
+	},
+	//显示动画持续时间
+	duration: {
+		value:0.5
+	},
+	//动画效果
+	easing: {
+		value: "backOut"
+	},
+	//是否动画显示
+	anim: {
+		value:0
+	},
+	//可以给每个菜单项加一个样式
+	itemCls:{
+
+	},
+	zIndex:{
+		value:999
+	}
+</textarea>
+
+
 </body>
 </html>
