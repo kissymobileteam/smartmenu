@@ -66,7 +66,7 @@ KISSY.add(function (S, Node,Base) {
 			var self = this,
 				wrapper = $('<div class="ks-funmenu-wrapper"></div>'),
 				items = self.get("items");
-				
+
 			//假设传入的是一个选择器
 			if(S.isString(items)){
 				items = $(items);
@@ -95,6 +95,9 @@ KISSY.add(function (S, Node,Base) {
 			self.set("wrapper",wrapper);
 			//标记为已渲染
 			self.set("isRender",true);
+			
+			self.fire("afterRenderUI");
+			
 		},
 		
 		//获取圆心的坐标
@@ -249,7 +252,8 @@ KISSY.add(function (S, Node,Base) {
 		},
 		//为了也能适应pc机
 		triggerType:{
-			value:(S.UA.android||S.UA.ios)?"tap":"click"
+			//value:(S.UA.android||S.UA.ios)?"tap":"click"
+			value:"tap click"
 		},
 		//是否显示
         visible: {
